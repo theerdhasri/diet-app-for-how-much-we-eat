@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Futuristic Nutrition Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+    <img src="images/nutrition.png" alt="Nutrition Image" class="top-image" />
+
+    <h1>🔮 Nutrition & Calorie Guide</h1>
+    <p>Enter your weight (kg) to know how much you should eat!</p>
+
+    <input type="number" id="weightInput" placeholder="Enter your weight in kg" />
+    <button onclick="calculateCalories()">Calculate</button>
+
+    <div id="result"></div>
+  </div>
+
+  <!-- ✅ JavaScript is embedded below -->
+  <script>
+    function calculateCalories() {
+      const weight = parseFloat(document.getElementById("weightInput").value);
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(weight) || weight <= 0) {
+        alert("Please enter a valid weight!");
+        return;
+      }
+
+      const calories = Math.round(weight * 30);
+      const protein = Math.round(weight * 1.6);
+      const fats = Math.round((calories * 0.25) / 9);
+      const carbs = Math.round((calories - (protein * 4 + fats * 9)) / 4);
+
+      resultDiv.innerHTML = `
+        <strong>🧮 Based on your weight:</strong><br>
+        - Total Calories: <b>${calories}</b> kcal/day<br>
+        - Protein: <b>${protein}g</b><br>
+        - Fats: <b>${fats}g</b><br>
+        - Carbs: <b>${carbs}g</b><br><br>
+      `;
+
+      if (weight > 100) {
+        alert("😅 Thini inka entha lavvuthav bro?");
+      } else if (weight < 45) {
+        alert("🥲 Inka thinala? Thini ra bhai!");
+      } else {
+        alert("👍 Perfect! Maintain this with clean food.");
+      }
+    }
+  </script>
+
+</body>
+</html>
